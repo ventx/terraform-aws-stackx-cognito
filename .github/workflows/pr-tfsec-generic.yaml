@@ -1,0 +1,15 @@
+name: PR - Tfsec
+
+# https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/troubleshooting-required-status-checks#handling-skipped-but-required-checks
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'examples/**'
+      - 'tests/**'
+      - '**.tf'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "No run required - no code change"'

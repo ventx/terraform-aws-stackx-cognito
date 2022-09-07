@@ -1,0 +1,26 @@
+name: PR - Tfsec
+
+on:
+  pull_request:
+    paths:
+      - 'examples/**'
+      - 'tests/**'
+      - '**.tf'
+
+jobs:
+  tfsec:
+    name: Tfsec
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      TF_IN_AUTOMATION: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: tfsec
+        id: tfsec
+        uses: tfsec/tfsec-pr-commenter-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,39 @@
+name: PR - Tflint
+
+on:
+  pull_request:
+    paths:
+      - 'examples/**'
+      - 'tests/**'
+      - '**.tf'
+
+jobs:
+  tflint:
+    name: Tflint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      TF_IN_AUTOMATION: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set Versions
+        run: |
+          TFLINTVER=$(grep .tool-versions -e "tflint" | sed "s/tflint \(.*\)/\1/")
+          echo "TFLINTVERSION=$TFLINTVER" >> $GITHUB_ENV
+
+      - uses: terraform-linters/setup-tflint@v2
+        id: tflintsetup
+        name: Setup TFLint
+        with:
+          tflint_version: v${{ env.TFLINTVERSION }}
+
+      - name: Init TFLint
+        id: tflintinit
+        run: tflint --init
+
+      - name: Run TFLint
+        id: tflint
+        run: tflint -f compact

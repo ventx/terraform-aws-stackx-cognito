@@ -1,0 +1,8 @@
+documentation:
+  - docs/**/*
+  - .github/*
+  - ./*.md
+
+ci:
+  - .dependabot/*
+  - .github/workflows/*
