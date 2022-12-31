@@ -24,12 +24,6 @@ lint: tflint ## Run tflilnt on your code.
 .PHONY: destroy
 destroy: tf-destroy ## Run terraform destroy.
 
-.PHONY: package
-package: ## Package lambda code to zip archive.
-	@printf "\nZip Lambda function code ...\n"
-	@zip -j function/pre-sign-up/function.zip function/pre-sign-up/*.js
-	@printf "\033[36m make $@\033[0m: Finished\n"
-
 .PHONY: plan
 plan: tf-plan ## Run terraform plan.
 
