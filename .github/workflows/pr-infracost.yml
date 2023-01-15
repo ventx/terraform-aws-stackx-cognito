@@ -17,7 +17,6 @@ jobs:
     env:
       TF_ROOT: ./examples
       INFRACOST_ENABLE_CLOUD: false
-      INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
     steps:
       - name: Setup Infracost
         uses: infracost/actions/setup@v2
