@@ -17,11 +17,12 @@ jobs:
     env:
       TF_ROOT: ./examples
       INFRACOST_ENABLE_CLOUD: false
+      INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
     steps:
       - name: Setup Infracost
         uses: infracost/actions/setup@v2
         with:
-          api-key: ${{ secrets.INFRACOST_API_KEY }}
+          api-key: ${INFRACOST_API_KEY}
           currency: EUR
 
       # Checkout the base branch of the pull request (e.g. main/master).
